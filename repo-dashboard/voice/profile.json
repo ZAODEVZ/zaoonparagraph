@@ -1,19 +1,15 @@
 {
   "profile": "zao",
-  "note": "style profile the voice-guide command fills from the 400+ edition archive. uppercase is allowed inside this file only.",
-  "greeting": "zm",
-  "signoffs": ["BUILD ON", "let's build"],
-  "credit": "ZABAL Team",
-  "case": "lowercase",
-  "allowedUppercase": ["BUILD ON", "ZABAL Team", "ZABAL"],
-  "banned": ["bullet points", "numbered lists", "emojis", "em dashes", "caps in body"],
-  "cadence": "punchy, high-velocity, short hard sentences",
-  "priority": "raw authentic voice over polished prose",
-  "signals": {
-    "avgSentenceWords": null,
-    "openRatePeaks": null,
-    "topFragments": []
-  },
-  "source": "research/voice-index",
+  "note": "voice profile the gate enforces. uppercase is allowed inside this file only.",
+  "casing": "strict_lowercase",
+  "allowedPunctuation": [".", ":", "space"],
+  "forbidden": ["!", "commas", "bullets", "emojis", "em dash", "en dash"],
+  "signature": "- BetterCallZaal on behalf of the ZABAL Team",
+  "allowedUppercase": ["BetterCallZaal", "ZABAL Team", "ZABAL"],
+  "acceptedWords": ["zm", "devz", "arcade", "cookin", "builder", "vibez"],
+  "rejectedWords": ["delighted", "furthermore", "excited", "testament", "thrilled"],
+  "contentUrl": "https://zabalgamez.com",
+  "communityVibe": ["arcade", "devz", "zabal"],
+  "source": "research",
   "generatedBy": "voice-guide"
 }

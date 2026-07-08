@@ -1,13 +1,17 @@
-// voice gate. keeps all prose strict lowercase and on-voice.
-// rules: strict_lowercase, no bullets, no numbered lists, no emojis, no em dashes.
-// single signature line: "- BetterCallZaal on behalf of the ZABAL Team".
-// the only allowed uppercase is the signature tokens. this helper flags, it does not rewrite.
+// voice gate. enforces the zao voice profile before any gate proceeds.
+// casing: strict lowercase. forbidden: ! , bullets emojis em/en dashes. rejected words list.
+// allowed uppercase: signature tokens only. required: the signature line.
+// this helper flags, it never rewrites. it is eyes-only for the harness.
 
 import { config } from "./config.js";
 
 const ALLOWED_UPPER = ["BetterCallZaal", "ZABAL Team", "ZABAL"];
+const REJECTED_WORDS = ["delighted", "furthermore", "excited", "testament", "thrilled"];
+
 const BANNED = [
-  { rx: /[—]/, why: "em dash" },
+  { rx: /!/, why: "exclamation mark" },
+  { rx: /,/, why: "comma" },
+  { rx: /[—–]/, why: "em or en dash" },
   { rx: /[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}]/u, why: "emoji" },
   { rx: /^\s*[*+]\s+/m, why: "bullet point" },
   { rx: /^\s*\d+\.\s+/m, why: "numbered list" },
@@ -26,7 +30,12 @@ function strayCaps(text) {
   return scrubbed.split("\n").filter((l) => /[A-Z]/.test(l)).length;
 }
 
-// returns { onVoice, issues[] }. drives the "voice: pass/flag" chip in review and the ui.
+// whole-word match on the rejected list, case-insensitive.
+function rejectedHits(text) {
+  return REJECTED_WORDS.filter((w) => new RegExp(`\\b${w}\\b`, "i").test(text));
+}
+
+// returns { onVoice, issues[] }. drives the voice check every gate runs before proceeding.
 export function checkVoice(text) {
   const issues = [];
   if (!text.includes(config.signature)) issues.push(`missing the signature line "${config.signature}"`);
@@ -34,5 +43,7 @@ export function checkVoice(text) {
   if (bulletMiss(text)) issues.push("contains a bullet point");
   const caps = strayCaps(text);
   if (caps) issues.push(`stray uppercase on ${caps} line(s)`);
+  const rejected = rejectedHits(text);
+  if (rejected.length) issues.push(`uses rejected word(s): ${rejected.join(", ")}`);
   return { onVoice: issues.length === 0, issues };
 }
