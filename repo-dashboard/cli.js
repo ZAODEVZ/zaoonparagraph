@@ -8,6 +8,7 @@ import { archive } from "./src/commands/archive.js";
 import { review } from "./src/commands/review.js";
 import { lock } from "./src/commands/lock.js";
 import { dispatch } from "./src/commands/dispatch.js";
+import { context } from "./src/commands/context.js";
 import { serveUi } from "./src/ui/server.js";
 
 const program = new Command();
@@ -43,6 +44,12 @@ program
   .option("--force", "dispatch without the locked-stage guard")
   .description("send a locked draft to its lane's email + social channels")
   .action((id, opts) => dispatch(id, opts));
+
+program
+  .command("context")
+  .argument("[lane]", "daily-3 | deep-dive | recap")
+  .description("assemble the context pack (voice + brief + facts) to hand paragraph")
+  .action((lane) => context(lane));
 
 program
   .command("ui")

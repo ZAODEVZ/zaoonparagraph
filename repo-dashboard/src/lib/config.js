@@ -31,6 +31,9 @@ export const config = {
   templatesDir: path.resolve(repoRoot, "templates"),
   contentDir: path.resolve(repoRoot, "content"),
   socialsDir: path.resolve(repoRoot, "socials"),
+  // the context layer: voice + briefs + facts the repo hands to paragraph.
+  contextDir: path.resolve(dashboardRoot, "context"),
+  voiceProfile: path.resolve(dashboardRoot, "voice", "profile.json"),
   // voice: strict lowercase, no bullets, no emojis, single signature line.
   signature: "- BetterCallZaal on behalf of the ZABAL Team",
   landingUrl: "https://zabalgamez.com",
