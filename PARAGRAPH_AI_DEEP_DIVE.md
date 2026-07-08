@@ -112,3 +112,64 @@ The approve -> lock -> publish/post flow and "suggestion ids" we see in the UI a
 - [FULL] Paragraph blog - https://paragraph.com/@blog (2025-26 feature timeline)
 - [FULL] github.com/paragraph-xyz/markets (reference impl), github.com/paragraph-xyz/paragraph-sdk-js
 - [FULL] testingcatalog.com - Paragraph GPT-4 assistant (2024 model confirmation)
+
+
+---
+
+# ADDENDUM - verified from the live @thezao account (2026-07-08)
+
+Screenshots of Settings resolved most of the UNVERIFIED gaps above. Corrections + new finds:
+
+## Memory is REAL (correction to section 3)
+
+`Settings -> Agent -> Memory`: "Your agent reads this every turn." It is a structured form, not free chat memory:
+- **Goals** (list) - currently: "Analyze existing Paragraph posts and adapt writing style to max channels like social and email dist..."
+- **Brand voice (long-form)** - **EMPTY right now** (gap to fill)
+- **Brand voice (X/social)** - filled with the extracted guide
+- **Notes** - empty
+- A "Save changes" button.
+
+The "could not save the brand voice guide" failure was the agent's `updateWorkingMemory` **tool missing in that session** (confirmed by the billing chat title) - NOT that memory doesn't exist. Fix: fill the fields **manually** in this panel. The repo ledger stays canonical; we paste from it into these fields.
+
+## Paragraph's agent is ALSO an MCP client (new - big)
+
+`Settings -> Agent -> Connected MCP servers`: "Add external tools your agent can use." Popular: Slack, Linear, Notion, GitHub. Plus a custom **Name + Remote MCP URL + Auth (OAuth)** row. "No MCP servers connected yet."
+
+So MCP runs BOTH directions:
+- We drive Paragraph FROM Claude Code via Paragraph's hosted MCP (`mcp.paragraph.com/mcp`).
+- We wire OUR systems INTO Paragraph's agent by adding a remote MCP URL here (e.g. the cowork tracker, Bonfire, GitHub) so its agent can read ZAO context while it drafts.
+
+## API key already provisioned (correction to section 5)
+
+`Settings -> Workspace -> Developer`: an API key named **"AI Assistant"** (`para_rEY...`) was created **Jul 7 2026**. So API access is already live - "Create API keys to publish posts and manage subscribers programmatically."
+
+## Permissions = the gate (resolves section 2 + 4)
+
+`Settings -> Permissions`: "Tasks your agent can run without asking for approval." Granular per-action Allow toggles, all currently requiring approval (safe default):
+- X (@bettercallzaal): post tweets, quote, retweet, like, follow users
+- Paragraph: save new draft posts, update post drafts, publish posts, send test emails
+
+This is where the approve -> auto flow is set. Recommendation: keep **publish** + **post tweets** gated (human approval); safe to auto-allow **save draft** + **update draft** + **send test email** so the agent can prep without shipping.
+
+## Social connection (resolves section 4)
+
+X connection = **@bettercallzaal** ("your agent can post and read on X"), team-shared. Reconnect available. Also: **Telegram** (chat with the agent from anywhere, one-time link) and **Slack** ("Add to Slack") agent connections.
+
+## Billing / limits (resolves section 7)
+
+Free plan (Paragraph Free), $0, resets monthly (next Aug 8 2026). **5,500 credits/month.** 419 used (8%). Credit costs are per-chat and vary a lot - the "ZAO Newsletter CLI Dashboard" chat alone burned **250**, "Brand and Social Voice Guides" 115. So heavy agent sessions are the cost driver; batch + reuse the ledger instead of re-deriving.
+
+## Website (new)
+
+`Settings -> Website`: currently **Classic blog**. A new Paragraph website stack exists (toggle "Use a Paragraph website", off) with a **custom site draft saved**. Public URL `paragraph.com/@thezao`. **Custom domain requires a paid plan.**
+
+## Housekeeping gaps spotted (need Zaal's OK to change - account edits)
+
+- **Account bio is STALE** - still the old "ZTalent Newsletter / InnoJam Spotlight / PlugIn Pulse / ZTalent Vibes" copy, not ZAO. Rewrite to the ZAO Newsletter voice.
+- **Workspace summary contains an em dash** - against house style; swap for a hyphen.
+- **Long-form brand voice is empty** - paste the canonical voice from `VOICE.md`.
+- Team on the workspace: Zaal (Owner), CandyToyBox/samantha (Admin), ugiagbeosayeman (Custom).
+
+## Updated confidence
+
+Now VERIFIED (was unverified): memory feature + structure, permissions/gating model, API key live, monetization (5,500 credits/mo free), MCP-client capability, Telegram/Slack agent, website stack. Still UNVERIFIED: exact LLM model, whether agent tasks can be scheduled recurring (the Goals field implies ongoing behavior but not a cron).
