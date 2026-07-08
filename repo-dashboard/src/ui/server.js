@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 import { config } from "../lib/config.js";
 import { listDrafts } from "../lib/drafts.js";
 import { readState, readDispatchLog } from "../lib/state.js";
-import { upcomingSlots } from "../lib/peak.js";
+import { allSlots } from "../lib/schedule.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
@@ -21,7 +21,7 @@ function snapshot() {
     drafts: listDrafts(),
     stats: readState("stats", []),
     dispatch: readDispatchLog().slice(-20).reverse(),
-    peaks: upcomingSlots(),
+    peaks: allSlots(),
     lanes: config.lanes,
   };
 }

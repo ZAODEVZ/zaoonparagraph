@@ -12,6 +12,8 @@ export const repoRoot = path.resolve(dashboardRoot, "..");
 
 // paragraph api. auth via app.paragraph.com token, kept in env, never committed.
 export const config = {
+  repoRoot,
+  dashboardRoot,
   apiBase: process.env.PARAGRAPH_API_BASE || "https://app.paragraph.com",
   token: process.env.PARAGRAPH_TOKEN || "",
   // the collection ids the dashboard watches for stats. comma separated in env.
@@ -20,11 +22,18 @@ export const config = {
     .map((s) => s.trim())
     .filter(Boolean),
   // where the archive index writes. relative to the parent repo.
-  archiveDir: path.resolve(repoRoot, "research", "voice-index"),
+  archiveDir: path.resolve(repoRoot, "research"),
   // the three draft lanes.
   lanes: ["daily-3", "deep-dive", "recap"],
+  // repo layout: drafts/ published/ templates/ research/.
+  draftsDir: path.resolve(repoRoot, "drafts"),
+  publishedDir: path.resolve(repoRoot, "published"),
+  templatesDir: path.resolve(repoRoot, "templates"),
   contentDir: path.resolve(repoRoot, "content"),
   socialsDir: path.resolve(repoRoot, "socials"),
+  // voice: strict lowercase, no bullets, no emojis, single signature line.
+  signature: "- BetterCallZaal on behalf of the ZABAL Team",
+  landingUrl: "https://zabalgamez.com",
   // local state the sidecar owns. safe to write here, never touches content/ or docs.
   stateDir: path.resolve(dashboardRoot, ".zao"),
   // peak dispatch windows. wed 10am, fri 2pm, sun 6pm, local time.

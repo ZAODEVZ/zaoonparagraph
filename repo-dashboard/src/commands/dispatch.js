@@ -1,45 +1,42 @@
-// zao dispatch
-// queues an approved x thread + linkedin post to the next peak slot. wed 10am, fri 2pm, sun 6pm.
-// only approved and locked editions are eligible. cards embed via editor-cardify, inspected in socials/ first.
+// zao dispatch [id]
+// sends a locked draft to its lane's email + social channels at the lane's peak slot.
+// daily-3 -> email + linkedin (wed 10am), deep-dive -> social + email (fri 2pm), recap -> all three (sun 6pm).
+// refuses anything not approved and locked. logs every push locally.
 
 import chalk from "chalk";
-import { postDispatch, getReviewStatus } from "../lib/paragraph.js";
-import { nextPeakSlot } from "../lib/peak.js";
+import { findDraft } from "../lib/loader.js";
+import { getReviewStatus, postDispatch } from "../lib/paragraph.js";
+import { nextSlotFor, lanes } from "../lib/schedule.js";
 import { appendDispatchLog } from "../lib/state.js";
 
-export async function dispatch(postId, { slot, force = false } = {}) {
-  if (!postId) {
-    console.log(chalk.yellow("\n  usage: zao dispatch <post-id> [--slot wed|fri|sun] [--force]\n"));
+export async function dispatch(id, { force = false } = {}) {
+  if (!id) {
+    console.log(chalk.yellow("\n  usage: zao dispatch <id> [--force]\n"));
     return { ok: false };
   }
 
-  const review = await getReviewStatus(postId);
-  const stage = review.ok ? review.data?.status || "unknown" : "unknown";
+  const draft = findDraft(id);
+  const remote = await getReviewStatus(id);
+  const stage = remote.ok ? remote.data?.status || "unknown" : draft ? draft.stage : "unknown";
 
-  // the gate again. we do not push unapproved content to socials.
-  if (!force && !["approved", "locked", "published"].includes(stage)) {
-    console.log(chalk.red(`\n  refused. post "${postId}" is at stage "${stage}". approve and lock before dispatch.\n`));
+  // the gate. only locked (or published) editions dispatch.
+  if (!force && !["locked", "published"].includes(stage)) {
+    console.log(chalk.red(`\n  refused. id "${id}" is at stage "${stage}". lock it first with: zao lock ${id}\n`));
     return { ok: false, refused: true };
   }
 
-  const target = nextPeakSlot();
+  const lane = draft?.lane || "deep-dive";
+  const slot = nextSlotFor(lane);
+  const channels = lanes[lane].channels;
+
   console.log(chalk.bold("\nzao dispatch\n"));
-  console.log(`  post: ${postId}   stage: ${chalk.cyan(stage)}`);
-  console.log(`  channels: x thread + linkedin (native auto-discharge after approval)`);
-  console.log(`  card embeds: editor-cardify link for every url`);
-  console.log(`  slot: ${chalk.green(target.label)}  (${target.iso})\n`);
+  console.log(`  id: ${id}   lane: ${lane}   stage: ${chalk.cyan(stage)}`);
+  console.log(`  channels: ${channels.join(" + ")}`);
+  console.log(`  slot: ${chalk.green(slot.label)}  (${slot.iso})`);
 
-  const res = await postDispatch({ postId, slotIso: target.iso, channels: ["x", "linkedin"] });
-  const entry = {
-    postId,
-    slot: target.label,
-    slotIso: target.iso,
-    channels: ["x", "linkedin"],
-    queued: res.ok,
-    note: res.ok ? "queued" : res.reason,
-  };
+  const res = await postDispatch({ postId: id, lane, slotIso: slot.iso, channels });
+  const entry = { postId: id, lane, slot: slot.label, slotIso: slot.iso, channels, queued: res.ok, note: res.ok ? "queued" : res.reason };
   appendDispatchLog(entry);
-
-  console.log(res.ok ? chalk.green("  queued to the peak slot.\n") : chalk.yellow(`  ${res.reason} (logged locally)\n`));
+  console.log(res.ok ? chalk.green("  queued to the lane.\n") : chalk.yellow(`  ${res.reason} (logged locally)\n`));
   return { ok: res.ok, entry };
 }
