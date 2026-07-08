@@ -5,15 +5,26 @@ running fact sheet. the repo owns this. paragraph reads it, it does not invent i
 ## season
 
 - program: zabal gamez, year of the zabal
-- current point: month 2, week 1
+- current point: day 189, month 2, week 1
 - window in focus: july 1 to 7, 2026
 - submissions this cycle: 3
-- momentum: devz and artists shipping builds, month 2 ramping
+- momentum: devz and artists shipping builds, arcade-doubling code settled in the repo, month 2 ramping
 
 ## links (always render as rich cards, never bare)
 
 - build quiz: https://zabalgamez.com/game/build-quiz
+- arcade: https://zabalgamez.com/game
+- quest: https://zabalgamez.com/quest
 - home: https://zabalgamez.com
+
+## catchphrases (integrate naturally, do not force)
+
+- play a game, take a board
+- it reads the record, not your word
+- builders building for builders
+- the quiet work compounds
+- small moves out loud every day
+- the build is the application
 
 ## build cards to slot (recap)
 
