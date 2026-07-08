@@ -7,7 +7,7 @@ orchestrator log of what paragraph ai reports and what it handed back. this is a
 - id: suggestion 8027
 - title: year of the zabal: month 2, week 1 recap
 - lane: recap
-- state: brand-passed, locked, sitting in the review panel (reported, unverified)
+- state: voice-passed, ~1400 chars (in 1200 to 1600 target), quiz isolated for a rich card, locked-ready in the review panel (reported, unverified)
 - body: july 1 to 7 recap, 3 submissions, build quiz at https://zabalgamez.com/game/build-quiz, three build card placeholders
 - distribution assets staged: native x thread + linkedin post
 - voice: strict lowercase, zero commas, zero exclamation, signature present
