@@ -16,6 +16,8 @@ the ledger of every paragraph chat and what it did. the repo tracks this because
 ## current focus
 
 - day 189 newsletter log, built in the define-brand-voice chat, using context/brand-voice.md and context/facts.md
+- status: drafted with x thread + linkedin, locked in review. gate-checked locally, all four pieces pass (zero commas, zero exclamation, strict lowercase, canonical signature on body and linkedin). awaiting your approval
+- note: paragraph can auto-post to x. keep it gated, x posts only after approve then lock, never straight from draft
 
 ## gaps to fill (what i still need from you per chat)
 
