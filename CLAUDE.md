@@ -36,3 +36,51 @@ paragraph ai drafts, review panel approves, publish, socials. detail in `WORKFLO
 - `voice-guide` — extract formatting rules from the 400+ historical posts.
 
 each is documented under `commands/`.
+
+# Archive Indexing Protocol
+
+Paragraph AI onboarding step:
+
+1. run: "start the archive index"
+   - routes from zaoonparagraph to paragraphs voice-clean-import
+   - crawls 400+ historical issues
+   - writes to research/voice-index/
+
+2. index completion signal: witness "global audit complete" status
+
+3. voice guide: "run voice-guide"
+   - extracts microscopic style signals
+   - creates /voice/profile.json
+
+4. draft lanes open: /daily-3, /deep-dive, /recap
+
+# Drafting Prompts by Lane
+
+/daily-3 (rapid, hourly up to 5x):
+- "daily-3: what rose this hour?"
+- "daily-3: what crashed/failed this hour?"
+- "daily-3: best fragment from our archive this week"
+
+/deep-dive:
+- "deep-dive: write from /voice/profile.json shape"
+- "deep-dive: pull fragments from last 10 editions, contrast with current arc"
+
+/recap:
+- "recap: summarize last 3 submissions + builds + zabalgamez.com/game/build-quiz stats"
+
+# Social Dispatch Spec
+
+paragraph auto-discharges native X thread and LinkedIn after approval.
+- card embeds only: use "editor-cardify link" for any URL
+- peak times: Wed 10am, Fri 2pm, Sun 6pm
+- inspect in socials/ folder before approve
+
+# Clipboard Handoff
+
+per edition: email draft sends raw text to clipboard, paragraphs socials click only in socials/ directory, attachments in /assets/.
+
+# Review Gate
+
+all drafts → review panel → approve (or edit) → lock → publish → socials.
+
+never bypass manual review in draft stage.
