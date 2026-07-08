@@ -1,0 +1,30 @@
+{
+  "name": "zao-onparagraph",
+  "version": "0.1.0",
+  "description": "zao cli dashboard sidecar for the paragraph flow. drafting, archive indexing, review gate, social dispatch.",
+  "type": "module",
+  "bin": {
+    "zao": "./cli.js"
+  },
+  "scripts": {
+    "start": "node cli.js start",
+    "ui": "node cli.js ui",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "axios": "^1.7.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0"
+  },
+  "keywords": [
+    "zao",
+    "paragraph",
+    "newsletter",
+    "cli",
+    "sidecar"
+  ],
+  "license": "MIT"
+}
