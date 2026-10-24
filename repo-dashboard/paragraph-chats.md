@@ -13,6 +13,10 @@ the ledger of every paragraph chat and what it did. the repo tracks this because
 - the arcade doubled overnight (jul 7) -> updated day 185 with a subtitle and teaser for ctr. paragraph.com/@thezao/year-of-the-zabal-day-185
 - the zabal gamez arcade doubled overnight (jul 7) -> posted the arcade-doubling launch tweet. x.com/bettercallzaal/status/2074670483589705898
 
+## dropped per ruling
+
+- old recap newsletter, suggestion 8027, year of the zabal month 2 week 1 recap: DROPPED. zaal ruled drop, vault decision grill-2026-10-24-grill.md item 6, relayed by orchestrator2 on 2026-10-24. not loaded, not scheduled, not published. left unpublished.
+
 ## current focus
 
 - day 189 newsletter log, built in the define-brand-voice chat, using context/brand-voice.md and context/facts.md
