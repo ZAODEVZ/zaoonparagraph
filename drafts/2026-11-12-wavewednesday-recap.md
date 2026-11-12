@@ -1,7 +1,7 @@
 lane: recap
 stage: final, second pass
 for: Day 316, publishing Friday 13 November 2026, 05:30 Eastern, written as a Thursday-morning look back
-notes for Zaal: second pass after your "still feel super ai sloppy" (DM, 12 Nov 20:10Z). What changed: it opens on the one fight that mattered instead of a scoreboard; every night gets one scene and one detail from the room, not a results log; the full results sit in one block at the end for anyone who wants them; the sentences vary; the stock lines are gone. Every number and quote is from the RewindZ transcript of the 11 Nov Space, wavewarz.info's public API, or the week's battle pages. Money in dollars at the rate on the night. The research behind the rewrite is ZAOresearch 2480.
+notes for Zaal: second pass after your "still feel super ai sloppy" (DM, 12 Nov 20:10Z). What changed: it opens on the one fight that mattered instead of a scoreboard; every night gets one scene and one detail from the room, not a results log; the full results sit in one block at the end for anyone who wants them; the sentences vary; the stock lines are gone. Every number and quote is from the RewindZ transcript of the 11 Nov Space, wavewarz.info's public API, or the week's battle pages. Money in dollars at the rate on the night. The research behind the rewrite is ZAOresearch 2482.
 
 Year of the ZABAL - Day 316
 
